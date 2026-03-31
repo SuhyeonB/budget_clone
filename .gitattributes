@@ -1,0 +1,49 @@
+# ===== IDE / 환경 =====
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+
+# ===== OS =====
+.DS_Store
+Thumbs.db
+
+# ===== Build =====
+/target/
+/out/
+
+# ===== Logs =====
+*.log
+
+# ===== Spring Boot =====
+/logs/
+/tmp/
+*.pid
+
+# ===== Gradle =====
+/.gradle/
+/build/
+
+# ===== Eclipse / IntelliJ / VSCode =====
+*.class
+*.jar
+*.war
+*.ear
+
+# ===== Secrets =====
+/*.keystore
+/*.jks
+/*.p12
+
+# ===== Environment / Config =====
+*.env
+application.properties
+application.yml
+application-*.properties
+application-*.yml
+
+# ===== Redis =====
+dump.rdb
+*.rdb
+*.aof

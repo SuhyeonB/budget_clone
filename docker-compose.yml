@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: budget-clone-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: budget_clone
+    ports:
+      - "3306:3306"
+  redis:
+    image: redis
+    container_name: budget-clone-redis
+    ports:
+      - "6379:6379"
