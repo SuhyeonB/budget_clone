@@ -14,7 +14,7 @@ import java.util.Date;
 @Slf4j(topic = "JwtUtil")
 public class JwtUtil {
 
-    private static final long ACCESS_TOKEN_TIME = 60 * 60 * 1000L;
+    private static final long ACCESS_TOKEN_TIME = 5 * 60 * 1000L;
     private static final long REFRESH_TOKEN_TIME = 14 * 24 * 60 * 60 * 1000L;
 
     @Value("${jwt.secret}")

@@ -2,16 +2,14 @@ package com.example.budget_clone.domain.auth.controller;
 
 import com.example.budget_clone.domain.auth.dto.request.LoginRequest;
 import com.example.budget_clone.domain.auth.dto.request.SignupRequest;
+import com.example.budget_clone.domain.auth.dto.response.TokenResponse;
 import com.example.budget_clone.domain.auth.dto.response.TokensResponse;
 import com.example.budget_clone.domain.auth.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,6 +27,13 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokensResponse> login(@RequestBody LoginRequest dto) {
         return ResponseEntity.ok(authService.login(dto));
+    }
+
+    @PostMapping("/reissue")
+    public ResponseEntity<TokenResponse> reissue (
+            @RequestHeader("refreshToken") String refreshToken
+    ) {
+        return ResponseEntity.ok(authService.reissue(refreshToken));
     }
 
 }
