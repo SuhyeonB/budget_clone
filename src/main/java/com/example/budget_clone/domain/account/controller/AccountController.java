@@ -3,6 +3,8 @@ package com.example.budget_clone.domain.account.controller;
 import com.example.budget_clone.domain.account.dto.request.CreateAccountRequest;
 import com.example.budget_clone.domain.account.dto.response.AccountResponse;
 import com.example.budget_clone.domain.account.service.AccountService;
+import com.example.budget_clone.domain.transaction.dto.response.TransactionResponse;
+import com.example.budget_clone.domain.transaction.service.TransactionService;
 import com.example.budget_clone.global.jwt.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.*;
 public class AccountController {
 
     private final AccountService accountService;
+    private final TransactionService transactionService;
 
     @PostMapping
     public ResponseEntity<AccountResponse> createAccount (
@@ -36,6 +39,15 @@ public class AccountController {
             @PathVariable String accountNumber
     ) {
         return ResponseEntity.ok(accountService.getAccount(userDetails.getUserId(), accountNumber));
+    }
+
+    @GetMapping("/{accountNumber}/transactions")
+    public ResponseEntity<Page<TransactionResponse>> getAllTransactionByAccount (
+            @AuthenticationPrincipal CustomUserDetails userDetails,
+            @PathVariable String accountNumber,
+            @PageableDefault(size = 10, sort = "createdAt", direction = Sort.Direction.DESC) Pageable pageable
+    ) {
+        return ResponseEntity.ok(transactionService.getTransactions(userDetails.getUserId(), accountNumber, pageable));
     }
 
     @GetMapping

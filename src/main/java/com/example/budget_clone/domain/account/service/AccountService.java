@@ -41,8 +41,7 @@ public class AccountService {
     public AccountResponse getAccount(Long userId, String accountNumber) {
         User user = userService.findUser(userId);
 
-        Account account = accountRepository.findByAccountNumber(accountNumber)
-                .orElseThrow(() -> new NotFoundException("해당 번호의 계좌는 존재하지 않습니다."));
+        Account account = findAccount(accountNumber);
 
         if (!account.getUser().getId().equals(user.getId())) {
             throw new ForbiddenException("본인의 계좌가 아닙니다.");
@@ -71,5 +70,10 @@ public class AccountService {
         }
 
         accountRepository.delete(account);
+    }
+
+    public Account findAccount (String accountNumber) {
+        return accountRepository.findByAccountNumber(accountNumber)
+                .orElseThrow(() -> new NotFoundException("해당 번호의 계좌는 존재하지 않습니다."));
     }
 }

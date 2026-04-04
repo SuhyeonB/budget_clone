@@ -13,7 +13,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<ErrorResponse> handleBadRequestException(BadRequestException e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ErrorResponse.of("NOT_FOUND", e.getMessage()));
+                .body(ErrorResponse.of("BAD_REQUEST", e.getMessage()));
     }
 
     @ExceptionHandler(ForbiddenException.class)
