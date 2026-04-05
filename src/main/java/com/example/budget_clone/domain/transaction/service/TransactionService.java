@@ -83,7 +83,6 @@ public class TransactionService {
 
     @Transactional
     public TransactionResponse updateTransaction(Long userId, Long transactionId, UpdateTransactionRequest dto) {
-        User user = userService.findUser(userId);
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new NotFoundException("해당 트랜잭션을 찾을 수 없습니다."));
 
@@ -108,7 +107,6 @@ public class TransactionService {
 
     @Transactional
     public void deleteTransaction (Long userId, Long transactionId) {
-        User user = userService.findUser(userId);
         Transaction transaction = transactionRepository.findById(transactionId)
                 .orElseThrow(() -> new NotFoundException("해당 트랜잭션을 찾을 수 없습니다."));
 
